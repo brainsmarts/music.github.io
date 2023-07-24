@@ -1,0 +1,24 @@
+.display{
+    background-color: aqua;
+    font-size:24;
+    padding:32px 16px;
+    border-radius: 2px;
+    transition-duration: 1s;
+}
+.display:hover{
+    background-color: blue;
+}
+
+.input{
+    background-color: white;
+    font-size:16;
+    padding:32px 32px;
+    border-radius: 2px;
+    transition-duration: 1s;
+    font-weight: bold;
+    transition: 1s;
+}
+
+.input:hover{
+    background-color: blue;
+}
