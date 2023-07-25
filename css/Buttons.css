@@ -9,6 +9,10 @@
     background-color: blue;
 }
 
+.display[selected="true"]{
+    background-color: red;
+}
+
 .input{
     background-color: white;
     font-size:16;
