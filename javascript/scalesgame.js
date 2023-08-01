@@ -3,12 +3,14 @@
 //12 buttons to press
 const gameDisplay = document.getElementById("GameInputDisplayButtons");
 const gameInput = document.getElementById("GameInputButtons");
+var gameOver = false;
 var selectedButton;
-var scale;
+var randomizedScale;
+const numOfDisplay = 7;
 
 function initialize(){
     console.log("Initialization Process Has Been Called");
-    for(var i = 0; i < 7; i++){
+    for(var i = 0; i < numOfDisplay; i++){
         var newButton = document.createElement("button");
 
         var indexAttribute = document.createAttribute("index");
@@ -44,15 +46,16 @@ function initialize(){
         gameInput.appendChild(newButton);
     }
 
-    scale = randomizeScale();
-    document.getElementById("testingText").innerHTML = scale;
+    randomizeScale();
+    document.getElementById("finish").addEventListener("click", finished);
+    document.getElementById("restart").addEventListener("click", restart);
 }
 
 function randomizeScale(){
-    var random = Math.floor(Math.random()*12); //returns 0 - 11
-    var text = document.getElementById("testingText");
-    return createNoteSet(random,major);
-    
+    var randomNote = Math.floor(Math.random()*12); //returns 0 - 11
+    var randomPattern = Math.floor(Math.random()*2);
+    randomizedScale = createNoteSet(randomNote,scalePatternRandomize[0][randomPattern]);
+    document.getElementById("testingText").innerHTML = scalePatternRandomize[1][randomPattern] + " " + randomizedScale[0] + " Scale";
 }
 
 function selectDisplayInput(){
@@ -61,22 +64,56 @@ function selectDisplayInput(){
     selectedButton.setAttribute("selected","true");
 }
 
+function selectDisplayInputID(newSelecterButton){
+    selectedButton.setAttribute("selected","false");
+    selectedButton = selectedButton = document.getElementById(newSelecterButton);
+    selectedButton.setAttribute("selected","true");
+}
+
 //when an input is clicked, it will put the appropriate value and then select the 
 //next element to be the selected one
 function onNoteInput(){
-    //console.log(this.innerHTML);
+    if (gameOver)
+        return;
 
     var index = selectedButton.getAttribute("index");
-    console.log(this.innerHTML + " " + index);
-    for(var i = 0; i < 7; i++){
+    for(var i = 0; i < numOfDisplay; i++){
         var string = i+"";
         if (string == index){
             selectedButton.innerHTML = this.innerHTML;
-            if (i+1 < 7){
+            if (i+1 < numOfDisplay){
             selectedButton.setAttribute("selected","false");
             selectedButton = document.getElementById("display-"+(i+1));
             selectedButton.setAttribute("selected","true");
             }
         }
     }
+}
+
+function finished(){
+    gameOver = true;
+    var win = true;
+    var score = numOfDisplay;
+    var result = "";
+    for (var i = 0; i < numOfDisplay; i++){
+        if(document.getElementById("display-"+i).innerHTML.localeCompare(randomizedScale[i]) == 0){
+            result += document.getElementById("display-"+i).innerHTML + " " + randomizedScale[i] + " pass\n";
+        }else{
+            result += document.getElementById("display-"+i).innerHTML + " " + randomizedScale[i] + " fail\n";
+            win = false;
+            score -= 1;
+        }
+    }
+    result += randomizedScale;
+    result += " " + score;
+    document.getElementById("Results").innerHTML = result;
+}
+
+function restart(){
+    for(var i = 0; i < numOfDisplay; i++){
+        document.getElementById("display-"+i).innerHTML = "";
+    }
+    randomizeScale();
+    selectDisplayInputID("display-0");
+    gameOver = false;
 }
