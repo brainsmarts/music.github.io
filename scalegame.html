@@ -8,18 +8,22 @@
     <link rel="stylesheet" href="css/Buttons.css"></link>
   </head>
   <body onload = "initialize()">
-    <div id = testingGroudns> 
-      <p id = testingText> ehe :3 </p>
+    <div id = "game_container">
+      <div id="input_display_container"></div>
+      <div>
+        <p id = "scale_text_content">
+      </p></div>
+      <div id="input_button_container"></div>
+      <div id="nav_button_container">
+        <button id = "finished_button">Finish</button>
+        <button id = "restart_button">Restart</button>
+        <button><a href="scales.html">Back</a></button>
+      </div>
     </div>
-    <div id="GameInputDisplayButtons"></div>
-    <div id="GameInputButtons"></div>
-    <div id="NavButtons">
-      <button><a href="scales.html">Back</a></button>
-      <button id = "restart">Restart</button>
-      <button id = "finish">Finish</button>
-    </div>
-    <div id = "GameResultDiv">
-      <p id = Results> you win :3</p>
+    
+    
+    <div id = "result_container">
+      <p id = "result_content"></p>
     </div>
     <script type="text/javascript" src="javascript/noteMethods.js"></script>
     <script type ="text/javascript" src="javascript/scalesgame.js" language=""></script>

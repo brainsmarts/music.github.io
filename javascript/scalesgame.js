@@ -1,8 +1,8 @@
 
 //7 buttons in the middle with nothing inside
 //12 buttons to press
-const gameDisplay = document.getElementById("GameInputDisplayButtons");
-const gameInput = document.getElementById("GameInputButtons");
+const gameDisplay = document.getElementById("input_display_container");
+const gameInput = document.getElementById("input_button_container");
 var gameOver = false;
 var selectedButton;
 var randomizedScale;
@@ -24,12 +24,12 @@ function initialize(){
         }
 
         newButton.innerHTML = "";
-        newButton.className = "display";
+        newButton.className = "display_button";
  
         newButton.setAttributeNode(indexAttribute);
         newButton.setAttributeNode(selectedAttribute);   
 
-        newButton.id = "display-"+i;     
+        newButton.id = "display_button-"+i;     
         newButton.addEventListener("click",selectDisplayInput);
         gameDisplay.appendChild(newButton);
 
@@ -40,22 +40,23 @@ function initialize(){
 
     for(var i = 0; i < 12; i++){
         var newButton = document.createElement("button");
-        newButton.className = "input";
+        newButton.className = "input_button";
+        newButton.id = "input_button-"+i;
         newButton.innerHTML = noteList[i];
         newButton.addEventListener("click",onNoteInput);
         gameInput.appendChild(newButton);
     }
 
     randomizeScale();
-    document.getElementById("finish").addEventListener("click", finished);
-    document.getElementById("restart").addEventListener("click", restart);
+    document.getElementById("finished_button").addEventListener("click", finished);
+    document.getElementById("restart_button").addEventListener("click", restart);
 }
 
 function randomizeScale(){
     var randomNote = Math.floor(Math.random()*12); //returns 0 - 11
     var randomPattern = Math.floor(Math.random()*2);
     randomizedScale = createNoteSet(randomNote,scalePatternRandomize[0][randomPattern]);
-    document.getElementById("testingText").innerHTML = scalePatternRandomize[1][randomPattern] + " " + randomizedScale[0] + " Scale";
+    document.getElementById("scale_text_content").innerHTML = scalePatternRandomize[1][randomPattern] + " " + randomizedScale[0] + " Scale";
 }
 
 function selectDisplayInput(){
@@ -83,7 +84,7 @@ function onNoteInput(){
             selectedButton.innerHTML = this.innerHTML;
             if (i+1 < numOfDisplay){
             selectedButton.setAttribute("selected","false");
-            selectedButton = document.getElementById("display-"+(i+1));
+            selectedButton = document.getElementById("display_button-"+(i+1));
             selectedButton.setAttribute("selected","true");
             }
         }
@@ -96,24 +97,24 @@ function finished(){
     var score = numOfDisplay;
     var result = "";
     for (var i = 0; i < numOfDisplay; i++){
-        if(document.getElementById("display-"+i).innerHTML.localeCompare(randomizedScale[i]) == 0){
-            result += document.getElementById("display-"+i).innerHTML + " " + randomizedScale[i] + " pass\n";
+        if(document.getElementById("display_button-"+i).innerHTML.localeCompare(randomizedScale[i]) == 0){
+            result += document.getElementById("display_button-"+i).innerHTML + " " + randomizedScale[i] + " pass\n";
         }else{
-            result += document.getElementById("display-"+i).innerHTML + " " + randomizedScale[i] + " fail\n";
+            result += document.getElementById("display_button-"+i).innerHTML + " " + randomizedScale[i] + " fail\n";
             win = false;
             score -= 1;
         }
     }
     result += randomizedScale;
     result += " " + score;
-    document.getElementById("Results").innerHTML = result;
+    document.getElementById("result_content").innerHTML = result;
 }
 
 function restart(){
     for(var i = 0; i < numOfDisplay; i++){
-        document.getElementById("display-"+i).innerHTML = "";
+        document.getElementById("display_button-"+i).innerHTML = "";
     }
     randomizeScale();
-    selectDisplayInputID("display-0");
+    selectDisplayInputID("display_button-0");
     gameOver = false;
 }
