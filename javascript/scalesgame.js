@@ -3,6 +3,7 @@
 //12 buttons to press
 const gameDisplay = document.getElementById("input_display_container");
 const gameInput = document.getElementById("input_button_container");
+const gameResult = document.getElementById("result_container");
 var gameOver = false;
 var selectedButton;
 var randomizedScale;
@@ -11,7 +12,7 @@ const numOfDisplay = 7;
 function initialize(){
     console.log("Initialization Process Has Been Called");
     for(var i = 0; i < numOfDisplay; i++){
-        var newButton = document.createElement("button");
+        var newDisplayButton = document.createElement("button");
 
         var indexAttribute = document.createAttribute("index");
         indexAttribute.value = i;
@@ -20,31 +21,38 @@ function initialize(){
         selectedAttribute.value = "false";
         if (i == 0){
             selectedAttribute.value = "true";
-            selectedButton = newButton;
+            selectedButton = newDisplayButton;
         }
 
-        newButton.innerHTML = "";
-        newButton.className = "display_button";
+        newDisplayButton.innerHTML = "";
+        newDisplayButton.className = "display_button";
  
-        newButton.setAttributeNode(indexAttribute);
-        newButton.setAttributeNode(selectedAttribute);   
+        newDisplayButton.setAttributeNode(indexAttribute);
+        newDisplayButton.setAttributeNode(selectedAttribute);   
 
-        newButton.id = "display_button-"+i;     
-        newButton.addEventListener("click",selectDisplayInput);
-        gameDisplay.appendChild(newButton);
+        newDisplayButton.id = "display_button-"+i;     
+        newDisplayButton.addEventListener("click",selectDisplayInput);
+        gameDisplay.appendChild(newDisplayButton);
+        
+        var displayContainer = document.createElement("div");
+        displayContainer.className = "result_item_container";
+        var newResultDisplay = document.createElement("p");
+        newResultDisplay.className = "result_item";
+        newResultDisplay.innerHTML = "hi"+i;    
+        displayContainer.appendChild(newResultDisplay);    
+        gameResult.appendChild(displayContainer);
 
-     
     }
 
     //selectedButton = document.ge
 
     for(var i = 0; i < 12; i++){
-        var newButton = document.createElement("button");
-        newButton.className = "input_button";
-        newButton.id = "input_button-"+i;
-        newButton.innerHTML = noteList[i];
-        newButton.addEventListener("click",onNoteInput);
-        gameInput.appendChild(newButton);
+        var newInputButton = document.createElement("button");
+        newInputButton.className = "input_button";
+        newInputButton.id = "input_button-"+i;
+        newInputButton.innerHTML = noteList[i];
+        newInputButton.addEventListener("click",onNoteInput);
+        gameInput.appendChild(newInputButton);
     }
 
     randomizeScale();

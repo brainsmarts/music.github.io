@@ -1,0 +1,143 @@
+/*------------------------------------*\
+  Temperary
+\*------------------------------------*/
+
+p{
+    text-align: center;
+    margin: 2%
+}
+
+nav{
+    background-color:   #37C3FF;
+    width:              100%;
+    margin-bottom:      auto;
+    font-size:          1vw;
+}
+
+body {
+    display:            grid;
+    margin:             0;
+    background-color:   #CAFFFF;
+    color:              #4D4D4D;
+}
+
+/*------------------------------------*\
+    #GAME CONTAINER
+\*------------------------------------*/
+.game_container{
+    background-color:   #37C3FF;
+    border-radius:      30px;
+    place-self:         center;
+    display:            grid;
+    width:              95%;
+    margin:             auto;
+    margin-top:         2%;
+}
+
+
+    #scale_text_content     {font-size: 7vw;}
+
+
+/*------------------------------------*\
+    #ELEMENT CONTAINER
+\*------------------------------------*/
+#input_display_container{
+    display:                grid;
+    grid-template-columns:  repeat(7,14.29%);
+    place-content:          center;
+    margin:                 2.5%;
+}
+    .display_button,.input_button{
+        background-color:   white;
+        color:              #4D4D4D;
+        place-self:         center;
+        aspect-ratio :      1/1;
+        width:              80%;
+        border-radius:      10%;
+        border:             none;
+        transition:         .3s;
+    }
+
+    .display_button{
+        font-size:5vw;
+    }
+
+    .display_button:hover, .input_button:hover   {transform: translateY(-.1em);}
+
+    .display_button[selected="true"]{
+        border:         solid;
+        border-width:   thick;
+        border-color:   #4d4d4d;
+    }
+
+
+#result_container{
+display:                grid;
+grid-template-columns:  repeat(7,14.29%);
+margin:                 2.5%;
+place-content:          center;
+}
+
+#result_container[hidden = "true"]{
+display:    none;
+}
+    .result_item_container{
+        place-self: center;
+        aspect-ratio:   1/1;
+        width:          80%;
+        background:     white;
+        display:        grid;
+        border-radius:  10%;
+    }
+        .result_item{
+            aspect-ratio:   1/1;
+            place-self:     center;
+            text-align:     center;
+            margin:         0;
+            font-size:      2vw;
+        }
+
+
+#input_button_container{
+display:                grid;
+grid-template-columns:  repeat(12,8.33%);
+place-content:          center;
+margin:                 2%;
+}
+
+    .input_button{
+        font-size: 3vw;
+    }
+
+
+#nav_button_container{
+display:                grid;
+grid-template-columns:  repeat(3,33%);
+margin:                 .5%;
+}
+
+    #finished_button , #restart_button,#back_button{
+        width:          15%;
+        border:         solid;
+        border-radius:  100%;
+        aspect-ratio:   1/1;
+    }
+
+    #finished_button{
+        place-self:         end;
+        background-color:   green;
+    }
+    #restart_button{
+        background-color:   yellow;
+        place-self:         center;
+    }
+    #back_button{
+        background-color:   red;
+        place-self:         start;
+    }
+
+
+
+
+
+
