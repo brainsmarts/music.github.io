@@ -106,6 +106,7 @@ function finished(){
     var result = "";
     for (var i = 0; i < numOfDisplay; i++){
         if(document.getElementById("display_button-"+i).innerHTML.localeCompare(randomizedScale[i]) == 0){
+            
             result += document.getElementById("display_button-"+i).innerHTML + " " + randomizedScale[i] + " pass\n";
         }else{
             result += document.getElementById("display_button-"+i).innerHTML + " " + randomizedScale[i] + " fail\n";
@@ -115,13 +116,14 @@ function finished(){
     }
     result += randomizedScale;
     result += " " + score;
-    document.getElementById("result_content").innerHTML = result;
+    document.getElementById("result_container").setAttribute("hidden","false");
 }
 
 function restart(){
     for(var i = 0; i < numOfDisplay; i++){
         document.getElementById("display_button-"+i).innerHTML = "";
     }
+    document.getElementById("result_container").setAttribute("hidden","true");
     randomizeScale();
     selectDisplayInputID("display_button-0");
     gameOver = false;
