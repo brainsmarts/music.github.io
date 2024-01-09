@@ -2,6 +2,10 @@
   Temperary
 \*------------------------------------*/
 
+*{
+    font-family: Arial;
+}
+
 p{
     text-align: center;
     margin: 2%
@@ -35,7 +39,8 @@ body {
 }
 
 
-    #scale_text_content     {font-size: 7vw;}
+    #scale_text_content     {font-size: 7vw; display: block;}
+    #scale_text_content[hidden = "true"]{display : none;}
 
 
 /*------------------------------------*\
@@ -47,6 +52,7 @@ body {
     place-content:          center;
     margin:                 2.5%;
 }
+
     .display_button,.input_button{
         background-color:   white;
         color:              #4D4D4D;
@@ -77,10 +83,8 @@ grid-template-columns:  repeat(7,14.29%);
 margin:                 2.5%;
 place-content:          center;
 }
-
-#result_container[hidden = "true"]{
-display:    none;
-}
+#result_container[hidden = "true"]{display:    none;}
+    
     .result_item_container{
         place-self: center;
         aspect-ratio:   1/1;
@@ -89,13 +93,26 @@ display:    none;
         display:        grid;
         border-radius:  10%;
     }
+    .result_item_container[pass = "true"]{
+        border:         solid;
+        border-width:   thick;
+        border-color:   green;
+    }
+
+    .result_item_container[pass = "false"]{
+        border:         solid;
+        border-width:   thick;
+        border-color:   red;
+    }
         .result_item{
             aspect-ratio:   1/1;
             place-self:     center;
             text-align:     center;
             margin:         0;
-            font-size:      2vw;
+            font-size:      5vw;
         }
+
+        
 
 
 #input_button_container{
@@ -104,6 +121,8 @@ grid-template-columns:  repeat(12,8.33%);
 place-content:          center;
 margin:                 2%;
 }
+
+#input_button_container[hidden = "true"]{display: none;}
 
     .input_button{
         font-size: 3vw;

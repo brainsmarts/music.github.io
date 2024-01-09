@@ -8,23 +8,23 @@
     <link rel="stylesheet" href="css/game.css"></link>
   </head>
   <body onload = "initialize()">
-    
+    <audio src = "/audiofiles/D-.mp3"></audio>
     <nav><p>hewwp</p  ></nav>
     <div class = "game_container">
 
       <div id="input_display_container"></div>
       <div id = "result_container" hidden = "true"></div>
       <div>
-        <p id = "scale_text_content"></p>
+        <p id = "scale_text_content" hidden = "false"></p>
       </div>
-      <div id="input_button_container"></div>
+      <div id="input_button_container" hidden = "false"></div>
 
       <div id="nav_button_container">
         <button id = "finished_button">Finish</button>
         <button id = "restart_button">Restart</button>
         <button id = "back_button"><a href="scales.html">Back</a></button>
       </div>
-      
+      <audio id = "note_audio"></audio>
     </div>
     
     <script type="text/javascript" src="javascript/noteMethods.js"></script>
