@@ -6,6 +6,21 @@
 //abcdefghijklmnopasdfjashdf
 const minor = [2, 1, 2, 2, 1, 2, 2];
 const major = [2, 2, 1, 2, 2, 2, 1];
+const noteFrequency = [
+  55.00,
+  58.27,
+  61.74,
+  65.41,
+  69.30,
+  73.42,
+  77.78,
+  82.31,
+  87.31,
+  92.50,
+  98.00,
+  103.83
+];
+
 const noteListWithAlternates = [
   ["A"],
   ["A#","B♭"],
@@ -19,7 +34,7 @@ const noteListWithAlternates = [
   ["F#","G♭"],
   ["G"]
   ["G#","A♭"]
-]
+];
 const noteList = [
   "A",
   "A#",
@@ -34,6 +49,7 @@ const noteList = [
   "G",
   "G#",
 ];
+
 const scalePatternRandomize = [
   [minor, major],
   ["Minor", "Major"],
@@ -69,64 +85,30 @@ if it is already an octive higher then reset back to the first octive
 const audioContext = new AudioContext();
 const audioElement = document.querySelector("audio"); 
 const track = audioContext.createMediaElementSource(audioElement);
+let noteAudio;
 
 
 function playNote(note) {
-  track.connect(audioContext.destination);
-  audioElement.play();
-  console.log("played");
-  /*
-  const buffer = new AudioBuffer({
-    numberOfChannels: 2,
-    length: audio.sampleRate * 2.0,
-    sampleRate: audioCtx.sampleRate,
-  });
-  const audio = context.createBufferSource();
-  audio.buffer = buffer;
-  audio.playbackRate.value = 2;
-  audio.connect(context.destination);
-  audio.start(0); */
- 
+  //track.connect(audioContext.destination);
+  //audioElement.play();
+  let audio = new Audio("./audiofiles/D-.mp3").play();
+  console.log("played using Audio()");
 }
-function loadSample(){
-  return fetch("./audiofiles/D-.mp3")
-    .then(response => response.arrayBuffer())
-    .then(buffer => context.decodeAudioData(buffer));
+
+function getFrequency(note){
+  let index = 0;
+  for(let i = 0; i < 12; i++){
+    if(note == noteList[i]){
+      index = i;
+      console.log("Note found");
+      break;
+    }
+    osc = audioContext.createOscillator();
+    osc.frequency.value = noteFrequency[index];
+    return osc;
+  }
+
+
 }
-//export {notelist,createNoteSet};
 
-/*
 
-function test(){
-    var button = this;
-    button.textContent = "it worked :3";
-    var id = button.getAttribute("id");
-   
-    button.id = "ehe:3";
-    console.log(id);
-
-    console.log("has been accessed");
-}*/
-
-const noteMP3 = {
-  "A": "A.mp3",
-  "A#": "A-.mp3",
-  "B♭": "A-.mp3",
-  "B": "B.mp3",
-  "C": "C.mp3",
-  "B#": "C.mp3",
-  "C#": "C-.mp3",
-  "D♭": "C-.mp3",
-  "D": "D.mp3",
-  "D#": "D-.mp3",
-  "E♭": "D-.mp3",
-  "E": "E.mp3",
-  "F♭": "E.mp3",
-  "F": "F.mp3",
-  "E#": "F.mp3",
-  "F#": "F-.mp3",
-  "G♭": "F-.mp3",
-  "G": "G.mp3",
-  "G#": "G-.mp3",
-  "A♭": "G-.mp3",
-};
