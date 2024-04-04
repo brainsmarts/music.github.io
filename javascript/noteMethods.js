@@ -58,6 +58,8 @@ const scalePatternRandomize = [
 
 const audioContext = new AudioContext();
 const gainNode = audioContext.createGain();
+let octave = 2;
+let lastPlayed = 5;
 gainNode.gain.value = 0.1; // setting it to 10%
 gainNode.connect(audioContext.destination);
 
@@ -86,11 +88,7 @@ if it is already an octive higher then reset back to the first octive
 //D# is the nicest sounding note
 
 function playNote(note) {
-  //track.connect(audioContext.destination);
-  //audioElement.play();
-  //let audio = new Audio("./audiofiles/D-.mp3").play();
   playFrequency(note);
-  console.log("played using Audio()");
 }
 
 function playFrequency(note){
@@ -98,16 +96,30 @@ function playFrequency(note){
   for(let i = 0; i < 12; i++){
     if(note == noteList[i]){
       index = i;
-      console.log(note + " Note found");
       break;
     }
   }
 
+  console.log("last played " + lastPlayed + " " + "  current note " + index);
+  if(lastPlayed >= 9 && index < 4){
+    console.log(note + "increase Octave");
+    octave += 1;
+    console.log(octave + " is octave");
+  } else if (lastPlayed < 4 && index >= 9){ 
+    octave -= 1;
+  }
+
   let ocs = audioContext.createOscillator();
-  ocs.frequency.value = noteFrequency[index] * 5;
+  ocs.frequency.value = noteFrequency[index] * Math.pow(2,octave);
+  console.log(noteFrequency[index] + " * " + octave);
+  console.log(ocs.frequency);
   ocs.connect(gainNode);
   ocs.start();
   ocs.stop(audioContext.currentTime + .5);
+  lastPlayed = index;
 }
 
 
+  //track.connect(audioContext.destination);
+  //audioElement.play();
+  //let audio = new Audio("./audiofiles/D-.mp3").play();
