@@ -56,6 +56,11 @@ const scalePatternRandomize = [
 ];
 
 
+const audioContext = new AudioContext();
+const gainNode = audioContext.createGain();
+gainNode.gain.value = 0.1; // setting it to 10%
+gainNode.connect(audioContext.destination);
+
 //import "../noteSets.json";
 
 function createNoteSet(scalenote, pattern) {
@@ -71,7 +76,6 @@ function createNoteSet(scalenote, pattern) {
   return newNoteSet;
 }
 
-
 //assume there are two octives of notes
 /*
 first make note of which note was played last, if it was the last three notes 
@@ -81,34 +85,29 @@ if it is already an octive higher then reset back to the first octive
  */
 //D# is the nicest sounding note
 
-
-const audioContext = new AudioContext();
-const audioElement = document.querySelector("audio"); 
-const track = audioContext.createMediaElementSource(audioElement);
-let noteAudio;
-
-
 function playNote(note) {
   //track.connect(audioContext.destination);
   //audioElement.play();
-  let audio = new Audio("./audiofiles/D-.mp3").play();
+  //let audio = new Audio("./audiofiles/D-.mp3").play();
+  playFrequency(note);
   console.log("played using Audio()");
 }
 
-function getFrequency(note){
+function playFrequency(note){
   let index = 0;
   for(let i = 0; i < 12; i++){
     if(note == noteList[i]){
       index = i;
-      console.log("Note found");
+      console.log(note + " Note found");
       break;
     }
-    osc = audioContext.createOscillator();
-    osc.frequency.value = noteFrequency[index];
-    return osc;
   }
 
-
+  let ocs = audioContext.createOscillator();
+  ocs.frequency.value = noteFrequency[index] * 5;
+  ocs.connect(gainNode);
+  ocs.start();
+  ocs.stop(audioContext.currentTime + .5);
 }
 
 

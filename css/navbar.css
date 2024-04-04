@@ -1,6 +1,30 @@
+/*------------------------------------*\
+  Temperary
+\*------------------------------------*/
+
+*{
+    font-family: Arial;
+}
+
+p{
+    text-align: center;
+    margin: 2%
+}
+
 .navbar{
-    list-style-type: none;
-    margin: 0;
-    padding: 1%;
-    border:0;
-} 
+    background-color:   #37C3FF;
+    width:              100%;
+    margin-bottom:      auto;
+    font-size:          1vw;
+}
+
+body {
+    display:            grid;
+    margin:             0;
+    background-color:   #CAFFFF;
+    color:              #4D4D4D;
+}
+
+button{
+    display: block;
+}
