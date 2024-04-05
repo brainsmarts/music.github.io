@@ -63,7 +63,7 @@ let lastPlayed = 5;
 gainNode.gain.value = 0.1; // setting it to 10%
 gainNode.connect(audioContext.destination);
 
-//import "../noteSets.json";
+//import "../noteSets.json";  
 
 function createNoteSet(scalenote, pattern) {
   //int and int array
